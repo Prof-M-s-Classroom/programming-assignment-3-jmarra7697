@@ -68,7 +68,23 @@ private:
         heapArray[j] = temp;
     }
 
-    void minHeapify(int idx);
+    // Helper function that restores min-heap property if it becomes violated at a certain node.
+    void minHeapHelper(int index) {
+        int smallest = index;
+        int left = left(index);
+        int right = right(index);
+
+        if (left < size && keyArray[left] < keyArray[smallest]) {
+            smallest = left;
+        }
+        if (right < size && keyArray[right] < keyArray[smallest]) {
+            smallest = right;
+        }
+        if (smallest != index) {
+            swap(index, smallest);
+            minHeapHelper(smallest);
+        }
+    }
 };
 
 #endif

@@ -17,7 +17,7 @@ public:
                 adjMatrix[i][j] = 0;
             }
         }
-        // Constructor first allocates the array of pointers, then allocates each row,
+        // First allocates the array of pointers, then allocates each row,
         // and initializes all edges to zero so there's no edges.
     };
     //Destructor
@@ -27,7 +27,7 @@ public:
         }
         delete[] adjMatrix;
     };
-    // Destructor deallocates each row and then deallocates the array of all pointers
+    // Deallocates each row and then deallocates the array of all pointers
 
     void addEdge(int u, int v, int weight) {
         adjMatrix[u][v] = weight; // Sets the weight for u -> v

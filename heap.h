@@ -28,7 +28,6 @@ public:
 
 
     void insert(int vertex, int key) {
-
         if (size == capacity) {
             return;
             // Edge case if the size of array is at capacity
@@ -37,12 +36,14 @@ public:
         heapArray[i] = vertex;
         keyArray[i] = key;
         position[vertex] = i;
-
+        // Places vertex at the end of heapArray, stores its key in keyArray, and updates the position mapping by i
 
         while (i != 0 && keyArray[parent(i)] > keyArray[i]) {
         swap(i, parent(i));
             i = parent(i);
         }
+        // if the new node's key is smaller than the parent's key, calls the swap() function to swap positions
+        // between heapArray and keyArray and updates position
     };
 
     int extractMin() {
@@ -81,6 +82,7 @@ public:
         }
     }
     // decreaseKey updates the priority, or key, of a specific vertex and then restores the min-heap property
+    // if the new node's key is smaller than its parent's key, calls the swap() function
 
     bool isInMinHeap(int vertex) {
         return position[vertex] != -1;

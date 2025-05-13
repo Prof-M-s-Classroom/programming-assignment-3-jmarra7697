@@ -29,17 +29,19 @@ public:
 
     void insert(int vertex, int key) {
 
-        if (size == capacity) { // Edge case if the size of array is at capacity
+        if (size == capacity) {
             return;
+            // Edge case if the size of array is at capacity
         }
-        int i = size;
+        int i = size++;
         heapArray[i] = vertex;
         keyArray[i] = key;
         position[vertex] = i;
-        size++;
+
 
         while (i != 0 && keyArray[parent(i)] > keyArray[i]) {
-
+        swap(i, parent(i));
+            i = parent(i);
         }
     };
 
@@ -62,14 +64,30 @@ public:
         minHeapHelper(0);
         return root;
     };
-    // extractMin first saves the root as the smallest key then replaces the root with the last element.
-    // It then updates the position of the element, reduces the heap size, and restores heap property from the root via minHeapHelper.
-    // Then finally returns the saved vertex, which is stored in the root value.
+    // extractMin first saves the root as the smallest key then replaces the root with the last element
+    // It then updates the position of the element, reduces the heap size, and restores heap property from the root via minHeapHelper
+    // Then finally returns the saved vertex, which is stored in the root value
 
 
-    void decreaseKey(int vertex, int newKey);
-    bool isInMinHeap(int vertex);
-    bool isEmpty();
+    void decreaseKey(int vertex, int newKey) {
+        int i = position[vertex];
+        if (i == -1) {
+            return;
+        }
+        keyArray[i] = newKey;
+        while (i != 0 && keyArray[parent(i)] > keyArray[i]) {
+            swap(i, parent(i));
+            i = parent(i);
+        }
+    }
+    // decreaseKey updates the priority, or key, of a specific vertex and then restores the min-heap property
+
+    bool isInMinHeap(int vertex) {
+        return position[vertex] != -1;
+    };
+    bool isEmpty() {
+        return size == 0;
+    };
 
 private:
     int* heapArray;        // Heap of vertex indices
@@ -90,19 +108,23 @@ private:
         int temp = heapArray[i];
         heapArray[i] = heapArray[j];
         heapArray[j] = temp;
+
+        int tempKey = keyArray[i];
+        keyArray[i] = keyArray[j];
+        keyArray[j] = tempKey;
     }
 
     // Helper function that restores min-heap property if it becomes violated at a certain node.
     void minHeapHelper(int index) {
         int smallest = index;
-        int left = left(index);
-        int right = right(index);
+        int l = left(index);
+        int r = right(index);
 
-        if (left < size && keyArray[left] < keyArray[smallest]) {
-            smallest = left;
+        if (l < size && keyArray[l] < keyArray[smallest]) {
+            smallest = l;
         }
-        if (right < size && keyArray[right] < keyArray[smallest]) {
-            smallest = right;
+        if (r < size && keyArray[r] < keyArray[smallest]) {
+            smallest = r;
         }
         if (smallest != index) {
             swap(index, smallest);

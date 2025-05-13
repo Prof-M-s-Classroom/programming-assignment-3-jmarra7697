@@ -42,7 +42,31 @@ public:
 
         }
     };
-    int extractMin();
+
+    int extractMin() {
+        // Edge cases if size is 1 or below
+        if (size <= 0) {
+            return -1;
+        }
+        if (size == 1) {
+            size--;
+            position[heapArray[0]] = -1;
+            return heapArray[0];
+        }
+
+        int root = heapArray[0];
+        position[root] = -1;
+        heapArray[0] = heapArray[size-1];
+        position[heapArray[0]] = 0;
+        size--;
+        minHeapHelper(0);
+        return root;
+    };
+    // extractMin first saves the root as the smallest key then replaces the root with the last element.
+    // It then updates the position of the element, reduces the heap size, and restores heap property from the root via minHeapHelper.
+    // Then finally returns the saved vertex, which is stored in the root value.
+
+
     void decreaseKey(int vertex, int newKey);
     bool isInMinHeap(int vertex);
     bool isEmpty();

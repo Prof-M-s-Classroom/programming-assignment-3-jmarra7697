@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "PA3::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PA3-Debug-67572069e2eb11f67070.json",
+					"jsonFile" : "target-PA3-Debug-45397375c6fd939f5ca1.json",
 					"name" : "PA3",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/manjumuralidharan/CLionProjects/PA3/cmake-build-debug",
-		"source" : "/Users/manjumuralidharan/CLionProjects/PA3"
+		"build" : "/Users/familiarnm/CLionProjects/programming-assignment-3-jmarra7697/cmake-build-debug",
+		"source" : "/Users/familiarnm/CLionProjects/programming-assignment-3-jmarra7697"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 7
 	}
 }
